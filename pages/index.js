@@ -1,33 +1,65 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import tw from "tailwind-styled-components";
-import mapboxgl from "mapbox-gl"; // or "const mapboxgl = require('mapbox-gl');"
 import { useEffect } from "react";
-
-mapboxgl.accessToken =
-  "pk.eyJ1IjoiZ21tbyIsImEiOiJjbDR4MTBnZDcyZHN4M2NzOHlxNHl6Nmc3In0.Mys1iMle8XQdVo_xKWkRoA";
+import Map from "./components/Map";
 
 export default function Home() {
-  useEffect(() => {
-    const map = new mapboxgl.Map({
-      container: "map",
-      style: "mapbox://styles/mapbox/streets-v11",
-      center: [-99.29011, 39.39172],
-      zoom: 3,
-    });
-  });
-
   return (
     <Wrapper>
-      <Map id="map"></Map>
-      <ActionItems>Start</ActionItems>
+      <Map />
+      <ActionItems>
+        <Header>
+          <UberLogo src="https://i.ibb.co/84stgjq/uber-technologies-new-20218114.jpg" />
+          <Profile>
+            <Name>Gabe Morring</Name>
+            <UserImage src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQthHVYX7uaGAQbJifvkv4GskIjvp14b9KIAQ&usqp=CAU" />
+          </Profile>
+        </Header>
+        <ActionButtons>
+          <Link href="/search">
+            <ActionButton>
+              <ActionButtonImage src="https://i.ibb.co/cyvcpfF/uberx.png" />
+              Ride
+            </ActionButton>
+          </Link>
+          <ActionButton>
+            <ActionButtonImage src="https://i.ibb.co/n776JLm/bike.png" />
+            Wheels
+          </ActionButton>
+          <ActionButton>
+            <ActionButtonImage src="https://i.ibb.co/5RjchBg/uberschedule.png" />
+            Reserve
+          </ActionButton>
+        </ActionButtons>
+        <InputButton>Where To?</InputButton>
+      </ActionItems>
     </Wrapper>
   );
 }
 
 const Wrapper = tw.div`flex flex-col h-screen `;
 
-const Map = tw.div`bg-red-500 flex-1`;
+const ActionItems = tw.div`flex-1 p-4`;
 
-const ActionItems = tw.div`flex-1`;
+const Header = tw.div`flex justify-between items-center`;
+
+const UberLogo = tw.img`h-28`;
+
+const Profile = tw.div`flex items-center`;
+
+const Name = tw.div`mr-4 w-20 text-lg`;
+
+const UserImage = tw.img`h-12 w-12 rounded-full border border-gray-300 p-px`;
+
+const ActionButtons = tw.div`flex `;
+
+const ActionButton = tw.div`flex flex-col items-center justify-center 
+                            bg-gray-200 flex-1 m-1 h-32 rounded-lg 
+                            transform hover:scale-105 transition text-xl`;
+
+const ActionButtonImage = tw.img`h-3/5`;
+
+const InputButton = tw.div`h-20 bg-gray-200 text-2xl p-4 mt-8 flex items-center rounded-lg`;
